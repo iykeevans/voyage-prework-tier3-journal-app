@@ -2,8 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import env from 'dotenv';
-// import "core-js/stable";
-// import "regenerator-runtime/runtime";
 import '@babel/polyfill';
 import routes from './routes';
 

@@ -8,6 +8,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 let data;
+let journalId;
 
 before(async () => {
   const mockData = {
@@ -18,7 +19,11 @@ before(async () => {
   const journal = new Journals(mockData);
   const response = await journal.save();
   data = response;
-})
+});
+
+after(async () => {
+  await Journals.findByIdAndRemove(journalId)
+});
 
 describe('route: get journals', () => {
   it('should return all journals', (done) => {
@@ -63,6 +68,7 @@ describe('route: post journal', () => {
         expect(res.status).to.equal(201);
         expect(res.body.status).to.equal(201);
         expect(res.body.data).to.be.an('object');
+        journalId = res.body.data._id;
         done();
       });
   });
