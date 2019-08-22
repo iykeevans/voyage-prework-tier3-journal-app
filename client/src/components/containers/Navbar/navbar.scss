@@ -1,0 +1,57 @@
+@import '../../../variables.scss';
+
+.nav {
+  width: 100%;
+  height: 85px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &__auth {
+    margin-right: 5%;
+  }
+
+  &__logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.125em;
+    margin-left: 5%;
+
+    span {
+      font-family: inherit;
+      color: #F2994A;
+      font-weight: 500;
+    }
+  }
+
+  &__btn {
+    font-size: 1em;
+    height: 100%;
+    border-style: none;
+    cursor: pointer;
+
+    &:nth-child(1) {
+      background-color: transparent;
+      margin-right: 50px;
+      
+      &:hover {
+        color: $primary-color;
+      }
+    }
+
+    &:nth-child(2) {
+      background: $login-btn-bgcolor;
+      border-radius: 10px;
+      padding: .6em 1.8em;
+      color: $primary-color;
+
+      &:hover {
+        background-color: $primary-color;
+        color: white;
+      }
+    }
+  }
+}
