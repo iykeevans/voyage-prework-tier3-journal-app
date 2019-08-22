@@ -2,6 +2,7 @@ import chai from 'chai'
 import chaiHttp from 'chai-http';
 
 import server from '../index';
+import './users';
 import './journals';
 
 const { expect } = chai;

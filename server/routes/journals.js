@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { addJournal, getJournal, getJournals, deleteJournal, updateJournal } from '../controllers/journals';
+import verifyToken from '../middlewares';
 
 const router = express.Router()
 
