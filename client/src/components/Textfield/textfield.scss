@@ -1,0 +1,30 @@
+@import '../../variables.scss';
+
+.textfield {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+
+  &__label {
+    text-transform: capitalize;
+    margin-top: 1em;
+    margin-bottom: .5em;
+    font-family: inherit;
+  }
+
+  &__content {
+    font-family: inherit;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    padding: .5em;
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    &:focus {
+      border-color: $primary-color;
+    }
+  }
+}

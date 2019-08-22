@@ -1,0 +1,14 @@
+@import './variables.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  //border: 1px solid blue;
+  font-family: 'Roboto', sans-serif;
+  color: $secondary-color;
+}
+
+a {
+  text-decoration: none;
+}
