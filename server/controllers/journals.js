@@ -2,6 +2,7 @@ import Journals from '../models/journals';
 
 export async function addJournal(req, res) {
   try {
+    req.body.user = req.user;
     const journal = new Journals(req.body);
     const data = await journal.save();
     
@@ -11,6 +12,7 @@ export async function addJournal(req, res) {
     });
   }
   catch(error) {
+    console.log('=======>', error);
     res.status(500).json({
       status: 500,
       error,
@@ -56,6 +58,7 @@ export async function getJournal(req, res) {
 export async function updateJournal(req, res) {
   try {
     const { id } = req.params;
+    req.body.user = req.user;
     const journal = await Journals.findByIdAndUpdate(id, req.body, { new: true });
 
     res.json({

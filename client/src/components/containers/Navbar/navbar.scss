@@ -11,8 +11,32 @@
   top: 0;
   left: 0;
 
+  &__menu {
+    display: none;
+    margin-right: 5%;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
   &__auth {
     margin-right: 5%;
+
+    &--true {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      background: white;
+      border: 1px solid transparent;
+      padding: 0 1.5em;
+      cursor: pointer;
+
+      &:hover {
+        background: $login-btn-bgcolor;
+      }
+    }
   }
 
   &__logo {
@@ -25,6 +49,27 @@
       color: #F2994A;
       font-weight: 500;
     }
+  }
+
+  &__user {
+    background: transparent;
+    border-radius: 100%;
+    border: 1px solid $primary-color;
+    width: 28px;
+    height: 28px;
+  }
+
+  &__username {
+    font-size: 1.2em;
+    font-family: Poppins;
+    margin-left: 15px;
+  }
+
+  &__user-icon {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    color: $primary-color;
   }
 
   &__btn {
@@ -53,5 +98,15 @@
         color: white;
       }
     }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav__auth {
+    display: none;
+  }
+
+  .nav__menu {
+    display: block;
   }
 }

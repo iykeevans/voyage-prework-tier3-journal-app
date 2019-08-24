@@ -33,3 +33,23 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .heading {
+    align-items: center;
+    
+    h1 {
+      font-size: 24px;
+
+      span {
+        margin: 0;
+      }  
+    }
+
+    
+    button {
+      width: 50%;
+      height: 45px;
+    }
+  }
+}

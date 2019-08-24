@@ -5,10 +5,22 @@
   padding: 0;
   box-sizing: border-box;
   //border: 1px solid blue;
-  font-family: 'Roboto', sans-serif;
+  // font-family: 'Roboto', sans-serif;
+  font-family: Poppins;
   color: $secondary-color;
 }
 
 a {
   text-decoration: none;
+}
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+  // body {
+  //   background-color: olive;
+  // }
+
+  .nav__auth {
+    display: none;
+  }
 }
