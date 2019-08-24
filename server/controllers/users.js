@@ -22,7 +22,7 @@ export async function createUser(req, res) {
       const user = new Users({ username, password: newPassword, email });
   
       const data = await user.save();
-      const token = await generateToken(data._id);
+      const token = await generateToken(data._id, username);
   
       res.status(201).json({
         status: 201,
@@ -62,14 +62,16 @@ export async function loginUser(req, res) {
       })
     } else {
       const { _id: id } = user;
-      const token = await generateToken(id);
+      const token = await generateToken(id, user.username);
 
       res.status(200).json({
         status: 200,
         message: 'successfully logged in',
+        token,
         data: {
-          token,
-          data: user
+          id,
+          username: user.username,
+          email: user.email
         }
       })
     }

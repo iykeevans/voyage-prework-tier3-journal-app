@@ -4,10 +4,6 @@ import users from './users';
 
 const router = express.Router();
 
-router.all('/', (req, res) => {
-  res.send('Welcome to the journal app')
-});
-
 router.all('/api/v1', (req, res) => {
   res.json({ status: 200, message: 'Welcome to the journal app API'})
 });

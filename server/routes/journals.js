@@ -7,8 +7,8 @@ const router = express.Router()
 
 router.get('/', getJournals);
 router.get('/:id', getJournal);
-router.post('/', addJournal);
-router.patch('/:id', updateJournal);
-router.delete('/:id', deleteJournal);
+router.post('/', verifyToken, addJournal);
+router.patch('/:id', verifyToken, updateJournal);
+router.delete('/:id', verifyToken, deleteJournal);
 
 export default router;

@@ -16,9 +16,10 @@ function Home() {
   useEffect(() => {
 
     const fetchJournals = async () => {
-      const journals = await getJournals();
+      const { data } = await getJournals();
+      const { data: journals } = data;
 
-      setJournals(journals)
+      setJournals(journals);
     }
 
     fetchJournals();
@@ -36,7 +37,7 @@ function Home() {
     <div className="home">
       <Heading toggleForm={ toggleForm } />
       <JournalList allJournals={journals}/>
-      { journalForm && <AddJournal toggleForm={ toggleForm } checkForm={ checkForm }/> }
+      { journalForm && <AddJournal toggleForm={ toggleForm } checkForm={ checkForm }/> }>
     </div>
   );
 }

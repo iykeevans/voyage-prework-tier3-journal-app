@@ -10,7 +10,9 @@ function Journal({ match }) {
 
   useEffect(() => {
     const fetchJournal = async () => {
-      const journal = await getJournals(id);
+      const { data } = await getJournals(id);
+      const { data: journal } = data;
+
       setJournal(journal);
     }
 

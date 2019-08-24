@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { X } from 'react-feather';
+import Loader from 'react-loader-spinner';
+
 import TextField from '../../Textfield/textfield';
 import ModalOverlay from '../../ModalOverlay/modalOverlay';
+import { signin } from '../../../services/users';
+import { setToken } from '../../../services/token';
 
 
-function Login({toggleForm}) {
+function Login({ toggleForm, formSubmitted }) {
+
+  const [loading, setLoading] = useState(false);
+
   const [ state, setState ] = useState({
     email: '',
     password: '',
@@ -19,9 +26,21 @@ function Login({toggleForm}) {
     })
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(state);
+    try {
+      setLoading(true)
+      const { data } = await signin(state);
+      const { token } = data;
+
+      setToken(token);
+      formSubmitted();
+      setLoading(false);
+      toggleForm();
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -48,7 +67,10 @@ function Login({toggleForm}) {
           handleChange={handleChange}
         />
         
-        <button className="journal-form__btn">Log in</button>
+        <button className="journal-form__btn">
+          {!loading && 'Log in'}
+          {loading && <Loader type="ThreeDots" height="24" width="24" color="white"/>}
+        </button>
         
       </form>
     </ModalOverlay>

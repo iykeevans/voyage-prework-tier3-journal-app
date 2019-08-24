@@ -7,8 +7,8 @@ export const comparePasswords = (inputPassword, password) => {
   return compareSync(inputPassword, password);
 }
 
-export const generateToken = (id) => {
-  return sign({id}, process.env.SECRET, { expiresIn: '1h'});
+export const generateToken = (id, username) => {
+  return sign({ id, username }, process.env.SECRET, { expiresIn: '1h'});
 }
 
 export const checkToken = (token, secret) => {
