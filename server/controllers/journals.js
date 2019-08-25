@@ -22,7 +22,7 @@ export async function addJournal(req, res) {
 
 export async function getJournals(req, res) {
   try {
-    const journals = await Journals.find();
+    const journals = await Journals.find().sort({ created_at: -1 });
 
     res.json({
       status: 200,

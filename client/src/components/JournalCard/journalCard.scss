@@ -5,6 +5,7 @@
   padding: 20px 10px 20px 20px;
   border-radius: 10px;
   background-color: white;
+  position: relative;
 
   &:hover {
     color: white !important;
@@ -26,49 +27,6 @@
     color: inherit;
   }
 
-  &__options {
-    display: flex;
-    background: transparent;
-    border: none;
-    height: 100%;
-    cursor: pointer;
-
-    &:hover {
-      background: white;
-      border-radius: 100%;
-      padding: 5px;
-      transition: .1s;
-    }
-  }
-
-  &__options-box {
-    position: absolute;
-    right: 0;
-    top: 36px;
-    border: 1px solid $primary-color;
-    border-radius: 20px;
-    background: white;
-
-    display: flex;
-    justify-content: space-between;
-
-    padding: .5em 1em;
-
-    :nth-child(1) {
-      &:hover {
-        color: blue;
-      }
-    }
-
-    :nth-child(2) {
-      margin-left: 1em;
-
-      &:hover {
-        color: red;
-      }
-    }
-  }
-
   &__date {
     font-size: 0.8125em;
     margin-bottom: 10px;
@@ -79,5 +37,58 @@
     font-size: 1.5em;
     font-weight: 500;
     color: inherit;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.452);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__options {
+    a {
+      background: #2F80ED;
+      border-radius: 5px;
+      color: white;
+      padding: .3em 1em;
+      font-size: 1em;
+
+      &:hover {
+        background-color: darken($color: #2F80ED, $amount: 20)
+      }
+    }
+
+    button {
+      border-radius: 5px;
+      color: white;
+      background: #F2C94C;
+      border: none;
+      font-size: 1em;
+      padding: .3em 1em;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken($color: #F2C94C, $amount: 20)
+      }
+
+      &:nth-child(2) {
+        margin: 0 10px;
+      }
+
+      &:nth-child(3) {
+        background: #EB5757;
+
+        &:hover {
+          background-color: darken($color: #EB5757, $amount: 20)
+        }
+      }
+    }
   }
 }

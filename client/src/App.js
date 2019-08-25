@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/containers/Navbar/navbar';
 import Home from './pages/Home/home';
 import Journal from './pages/Journal/journal';
+import MyJournals from './pages/MyJournals/myJournals';
 import { getToken } from './services/token';
 
 function App() {
@@ -25,8 +26,16 @@ function App() {
         formSubmitted={formSubmitted}
       />
       <Switch>
-        <Route path='/' exact component={Home} />
+        <Route 
+          path='/'
+          exact 
+          render={ (props) =><Home isAuthenticated={authenticated} {...props} /> } 
+        />
         <Route path='/journal/:id' component={Journal} />
+        <Route
+          path="/myjournals"
+          render={ (props) => <MyJournals isAuthenticated={authenticated} {...props} /> }
+        />
       </Switch>
     </Router>
   );
