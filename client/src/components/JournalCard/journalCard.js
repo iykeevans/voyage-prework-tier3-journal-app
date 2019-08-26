@@ -1,43 +1,51 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { MoreVertical } from 'react-feather'
+
+import JournalChecker from '../journalChecker';
 
 import './journalCard.scss';
 
-function JournalCard({ match, journal }) {
+function JournalCard({ journal, myJournal, handleDelete, handleEdit }) {
 
-  // console.log('=====-----?', match)
+  const { title, created_at, _id: id, user, body } = journal;
+  const { username } = user;
 
-  const [ showOptions, setShowOptions ] = useState(false);
+  const [options, setOptions] = useState(false);
 
   const toggleOptions = () => {
-    setShowOptions(!showOptions);
+    setOptions(!options);
   }
 
-  const { title, created_at, _id, user } = journal;
-  const { username } = user;
-  console.log('----->', username);
-
   return (
-    <Link to={`/journal/${_id}`}className="card">
+    <JournalChecker
+      myJournal={myJournal}
+      link={`/journal/${id}`}
+      toggleOptions={toggleOptions}
+    >
       <div className="card__head">
-        <p className="card__author">{ `Posted by ${username}` || 'Posted by Evan' }</p>
-
-        <Link className="card__options" onClick={ toggleOptions }>
-          <MoreVertical />
-        </Link>
-
-        { showOptions && <div className="card__options-box">
-          <Link>Edit</Link>
-          <Link>Delete</Link>
-        </div> }
+        <p className="card__author">
+          {(myJournal) ? moment(created_at).calendar() : `Posted by ${username}`}
+        </p>
       </div>
-      <p className="card__date">{ moment(created_at).format("DD MMM YYYY") }</p>
+      <p className="card__date">{moment(created_at).format("DD MMM YYYY")}</p>
       <p className="card__content">
-        { (title.length >= 33) ? `${title.substring(0, 33)}...` : title }
+        {(title.length >= 33) ? `${title.substring(0, 33)}...` : title}
       </p>
-    </Link>
+      {options &&
+        <div className="card__overlay">
+          <div className="card__options">
+            <Link to={`/journal/${id}`}>View</Link>
+            <button 
+              onClick={ () => handleEdit(id, { title, body }) }
+              >
+                Edit
+            </button>
+            <button onClick={ () => handleDelete(id) }>Delete</button>
+          </div>
+        </div>
+      }
+    </JournalChecker>
   );
 }
 

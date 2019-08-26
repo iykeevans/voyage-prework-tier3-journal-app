@@ -1,12 +1,17 @@
 import React from 'react';
+import moment from 'moment';
 
 import './heading.scss';
 
-function Heading({ toggleForm }) {
+function Heading({ toggleForm, authenticated, allJournals, heading }) {
   return (
     <div className="heading">
-      <h1>All Journals <span>updated 2 mins ago</span></h1>
-      <button onClick={ toggleForm }>Add new</button>
+      <h1>{ heading || 'All Journals' } 
+        <span>
+          updated { allJournals && moment(allJournals[0].created_at).fromNow()}
+        </span>
+      </h1>
+      {authenticated && <button onClick={ toggleForm }>Add new</button>}
     </div>
   );
 }

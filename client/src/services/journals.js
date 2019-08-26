@@ -10,6 +10,7 @@ export function createJournal(journal={}) {
 }
 
 export function mutateJournal(id=null, data={}) {
-  if (id && data) return client.patch(`/journals/${id}`, data); 
+  console.log('_________>', id, data, Object.keys(data).length)
+  if (id && Object.keys(data).length) return client.patch(`/journals/${id}`, data); 
   return client.delete(`/journals/${id}`);
 }

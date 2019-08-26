@@ -4,17 +4,18 @@ import Loader from 'react-loader-spinner'
 
 import TextField from '../../Textfield/textfield';
 import ModalOverlay from '../../ModalOverlay/modalOverlay';
-import { createJournal } from '../../../services/journals';
+import { createJournal, mutateJournal } from '../../../services/journals';
 
 import './addJournal.scss';
 
-function AddJournal({ toggleForm, checkForm }) {
+function AddJournal({ toggleForm, checkForm, editValues }) {
 
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const [ state, setState ] = useState({
-    title: '',
-    body: ''
+    title: editValues.title || '',
+    body: editValues.body || ''
   });
 
   const { title, body } = state;
@@ -30,14 +31,24 @@ function AddJournal({ toggleForm, checkForm }) {
     e.preventDefault();
     try {
       setLoading(true);
-      await createJournal(state);
 
-      checkForm();
-      setLoading(false);
-      toggleForm();
+      if (Object.keys(editValues).length) {
+        await mutateJournal(editValues.id, state);
+        checkForm();
+        setLoading(false);
+        toggleForm();
+      } else {
+        await createJournal(state);
+        checkForm();
+        setLoading(false);
+        toggleForm();
+      }
     }
     catch (error) {
-      console.log('||||||||>', error);
+      setErrors({
+        ...errors,
+        error: error.message
+      })
     }
   }
 
@@ -45,7 +56,9 @@ function AddJournal({ toggleForm, checkForm }) {
     <ModalOverlay>
       <form className="journal-form" onSubmit={ handleSubmit }>
         <div className="journal-form__head">
-          <p className="journal-form__title">Create a journal</p>
+          <p className="journal-form__title">
+            { (Object.keys(editValues).length) ? 'Edit Journal' : 'Create a journal'}
+          </p>
           <button className="journal-form__btn-close" onClick={ toggleForm }>
             <X className="journal-form__close"/>
           </button>
@@ -63,8 +76,8 @@ function AddJournal({ toggleForm, checkForm }) {
         </div>
         
         <button className="journal-form__btn">
-          {!loading && 'Create'}
-          {loading && <Loader type="ThreeDots" height="24" width="24" color="white"/>}
+          {!loading && (Object.keys(editValues).length) ? 'Edit' : 'Create'}
+          {loading && <Loader type="TailSpin" height={24} width={24} color="white"/>}
         </button>
         
       </form>
