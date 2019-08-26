@@ -1,11 +1,30 @@
+/**
+ * @function getToken
+ * @description gets a token sring from the localstorage
+ * @returns {string} token
+ */
 export function getToken() {
-  return localStorage.getItem('token')
+  // eslint-disable-next-line no-undef
+  return localStorage.getItem('token');
 }
 
+/**
+ * @function setToken
+ * @description gets a token string from the localstorage
+ * @param {string} token
+ * @returns {string} token
+ */
 export function setToken(token) {
-  return localStorage.setItem('token', token)
+  // eslint-disable-next-line no-undef
+  return localStorage.setItem('token', token);
 }
 
+/**
+ * @function setToken
+ * @description gets a token string from the localstorage
+ * @returns {string} token
+ */
 export function crushToken() {
+  // eslint-disable-next-line no-undef
   return localStorage.removeItem('token');
 }
