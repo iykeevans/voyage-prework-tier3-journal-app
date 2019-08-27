@@ -21,7 +21,7 @@ function App() {
     }
   }, [authenticated]);
 
-  const endpoint = 'http://localhost:5000/api/v1/auth';
+  const endpoint = 'https://chingu-journal-app.herokuapp.com/api/v1/auth';
 
   const login = async (e, userInfo, toggleForm) => {
     e.preventDefault();

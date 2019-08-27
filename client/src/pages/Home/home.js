@@ -42,7 +42,7 @@ function Journals({ authenticated }) {
     return () => (subscribed = false);
   }, [addJournalForm, editJournalForm]);
 
-  const endpoint = 'http://localhost:5000/api/v1/journals';
+  const endpoint = 'https://chingu-journal-app.herokuapp.com/api/v1/journals';
 
   const createJournal = async (e, journal) => {
     e.preventDefault();
