@@ -27,7 +27,10 @@ function SignUp({ toggleForm, registerUser }) {
 
   return (
     <ModalOverlay>
-      <form className="journal-form" onSubmit={e => registerUser(e, userInfo)}>
+      <form
+        className="journal-form"
+        onSubmit={e => registerUser(e, userInfo, toggleForm)}
+      >
         <div className="journal-form__head">
           <p className="journal-form__title">Sign up</p>
           <button

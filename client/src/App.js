@@ -36,10 +36,14 @@ function App() {
     }
   };
 
-  const registerUser = async (e, userInfo) => {
+  const registerUser = async (e, userInfo, toggleForm) => {
     e.preventDefault();
     try {
-      console.log('register button clicked', userInfo);
+      const { data } = await axios.post(`${endpoint}/signup`, userInfo);
+      alert(data.message);
+      setToken(data.token);
+      setAuthenticated(true);
+      toggleForm();
     } catch (error) {
       console.log(error);
     }
