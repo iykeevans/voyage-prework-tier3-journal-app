@@ -4,15 +4,13 @@ import { X } from 'react-feather';
 import TextField from '../../Textfield/textfield';
 import ModalOverlay from '../../ModalOverlay/modalOverlay';
 
-import './addJournal.scss';
-
 /**
- * @function AddJournal
- * @description adds a journal to the database
+ * @function EditJournal
+ * @description edit's a journal to the database
  * @param {object} props
  * @returns {object} JSX
  */
-function AddJournal({ toggleForm, submitJournal }) {
+function EditJournal({ toggleForm, getFormValues }) {
   const [journal, setJournal] = useState({
     title: '',
     body: ''
@@ -28,10 +26,10 @@ function AddJournal({ toggleForm, submitJournal }) {
   };
 
   return (
-    <ModalOverlay>
-      <form className="journal-form" onSubmit={e => submitJournal(e, journal)}>
+    <ModalOverlay onClick={toggleForm}>
+      <form className="journal-form" onSubmit={e => getFormValues(e, journal)}>
         <div className="journal-form__head">
-          <p className="journal-form__title">Create a journal</p>
+          <p className="journal-form__title">Edit Journal</p>
           <button
             type="submit"
             className="journal-form__btn-close"
@@ -56,11 +54,11 @@ function AddJournal({ toggleForm, submitJournal }) {
         </div>
 
         <button type="submit" className="journal-form__btn">
-          Create
+          Edit
         </button>
       </form>
     </ModalOverlay>
   );
 }
 
-export default AddJournal;
+export default EditJournal;

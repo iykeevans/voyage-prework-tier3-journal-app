@@ -14,12 +14,16 @@ const port = process.env.PORT || 5000;
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false })
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useFindAndModify: false
+  })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
@@ -29,7 +33,9 @@ app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
 app.use(routes);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', '..', 'client', 'dist', 'index.html'));
+  res.sendFile(
+    path.resolve(__dirname, '..', '..', 'client', 'dist', 'index.html')
+  );
 });
 
 app.listen(port, () => console.log(`Now running on port ${port}`));

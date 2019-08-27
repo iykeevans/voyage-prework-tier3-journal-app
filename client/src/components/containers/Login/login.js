@@ -1,80 +1,66 @@
 import React, { useState } from 'react';
 import { X } from 'react-feather';
-import Loader from 'react-loader-spinner';
 
 import TextField from '../../Textfield/textfield';
 import ModalOverlay from '../../ModalOverlay/modalOverlay';
-import { signin } from '../../../services/users';
-import { setToken } from '../../../services/token';
 
-
-function Login({ toggleForm, formSubmitted }) {
-
-  const [loading, setLoading] = useState(false);
-
-  const [ state, setState ] = useState({
+/**
+ * @function Login
+ * @param {object} props
+ * @return {object} JSX
+ */
+function Login({ toggleForm, login }) {
+  const [userInfo, setUserInfo] = useState({
     email: '',
-    password: '',
+    password: ''
   });
 
-  const { email, password } = state;
+  const { email, password } = userInfo;
 
   const handleChange = ({ target }) => {
-    setState({
-      ...state,
+    setUserInfo({
+      ...userInfo,
       [target.name]: target.value
-    })
+    });
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setLoading(true)
-      const { data } = await signin(state);
-      const { token } = data;
-
-      setToken(token);
-      formSubmitted();
-      setLoading(false);
-      toggleForm();
-    }
-    catch (error) {
-      console.log(error);
-    }
-  }
 
   return (
     <ModalOverlay>
-      <form className="journal-form" onSubmit={ handleSubmit }>
+      <form
+        className="journal-form"
+        onSubmit={e => login(e, userInfo, toggleForm)}
+      >
         <div className="journal-form__head">
           <p className="journal-form__title">Log in</p>
-          <button className="journal-form__btn-close" onClick={ toggleForm }>
-            <X className="journal-form__close"/>
+          <button
+            type="submit"
+            className="journal-form__btn-close"
+            onClick={toggleForm}
+          >
+            <X className="journal-form__close" />
           </button>
         </div>
 
-        <TextField 
+        <TextField
           label="email"
-          value={ email }
+          value={email}
           type="email"
           handleChange={handleChange}
         />
 
-        <TextField 
+        <TextField
           label="password"
-          value={ password }
+          value={password}
           type="password"
           handleChange={handleChange}
         />
-        
-        <button className="journal-form__btn">
-          {!loading && 'Log in'}
-          {loading && <Loader type="ThreeDots" height="24" width="24" color="white"/>}
+
+        <button type="submit" className="journal-form__btn">
+          Log in
         </button>
-        
       </form>
     </ModalOverlay>
-  )
+  );
 }
 
 export default Login;

@@ -2,17 +2,27 @@ import React from 'react';
 import moment from 'moment';
 
 import './heading.scss';
-
-function Heading({ toggleForm, authenticated, allJournals, heading }) {
-  console.log(allJournals);
+/**
+ * @function Heading
+ * @param {object} props
+ * @returns {object} JSX
+ */
+function Heading({ toggleForm, authenticated, journal }) {
   return (
     <div className="heading">
-      <h1>{ heading || 'All Journals' } 
+      <h1>
+        {authenticated ? 'My journals' : 'All Journals'}
         <span>
-          updated { allJournals && allJournals.length && moment(allJournals[0].created_at).fromNow()}
+          updated
+          {journal && <span>{moment(journal.created_at).fromNow()}</span>}
         </span>
       </h1>
-      {authenticated && <button onClick={ toggleForm }>Add new</button>}
+
+      {authenticated && (
+        <button type="submit" onClick={toggleForm}>
+          Add new
+        </button>
+      )}
     </div>
   );
 }

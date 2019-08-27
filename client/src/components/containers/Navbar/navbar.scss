@@ -46,7 +46,7 @@
 
     span {
       font-family: inherit;
-      color: #F2994A;
+      color: #f2994a;
       font-weight: 500;
     }
   }
@@ -81,7 +81,7 @@
     &:nth-child(1) {
       background-color: transparent;
       margin-right: 50px;
-      
+
       &:hover {
         color: $primary-color;
       }
@@ -90,7 +90,7 @@
     &:nth-child(2) {
       background: $login-btn-bgcolor;
       border-radius: 10px;
-      padding: .6em 1.8em;
+      padding: 0.6em 1.8em;
       color: $primary-color;
 
       &:hover {
@@ -101,12 +101,12 @@
   }
 }
 
-@media screen and (max-width: 600px) {
-  .nav__auth {
-    display: none;
-  }
+// @media screen and (max-width: 600px) {
+//   .nav__auth {
+//     display: none;
+//   }
 
-  .nav__menu {
-    display: block;
-  }
-}
+//   .nav__menu {
+//     display: block;
+//   }
+// }

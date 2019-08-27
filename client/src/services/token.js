@@ -10,7 +10,7 @@ export function getToken() {
 
 /**
  * @function setToken
- * @description gets a token string from the localstorage
+ * @description sets a token string to the localstorage
  * @param {string} token
  * @returns {string} token
  */
@@ -20,8 +20,8 @@ export function setToken(token) {
 }
 
 /**
- * @function setToken
- * @description gets a token string from the localstorage
+ * @function crushToken
+ * @description removes a token string from the localstorage
  * @returns {string} token
  */
 export function crushToken() {

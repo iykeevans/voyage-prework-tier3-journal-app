@@ -2,50 +2,52 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-import JournalChecker from '../journalChecker';
+import JournalWrapper from '../journalWrapper';
 
 import './journalCard.scss';
 
-function JournalCard({ journal, myJournal, handleDelete, handleEdit }) {
-
-  const { title, created_at, _id: id, user, body } = journal;
-  const { username } = user;
+/**
+ * @function JournalCard
+ * @param {object} props
+ * @returns {object} JSX
+ */
+function JournalCard({ journal, authenticated, updateJournal, deleteJournal }) {
+  const { title, created_at, _id: id, username, body } = journal;
 
   const [options, setOptions] = useState(false);
 
-  const toggleOptions = () => {
-    setOptions(!options);
-  }
-
   return (
-    <JournalChecker
-      myJournal={myJournal}
+    <JournalWrapper
+      authenticated={authenticated}
       link={`/journal/${id}`}
-      toggleOptions={toggleOptions}
+      toggleOptions={() => setOptions(!options)}
     >
       <div className="card__head">
         <p className="card__author">
-          {(myJournal) ? moment(created_at).calendar() : `Posted by ${username}`}
+          {authenticated
+            ? moment(created_at).calendar()
+            : `Posted by ${username}`}
         </p>
       </div>
-      <p className="card__date">{moment(created_at).format("DD MMM YYYY")}</p>
+      <p className="card__date">{moment(created_at).format('DD MMM YYYY')}</p>
       <p className="card__content">
-        {(title.length >= 33) ? `${title.substring(0, 33)}...` : title}
+        {title.length >= 33 ? `${title.substring(0, 33)}...` : title}
       </p>
-      {options &&
+      {options && (
         <div className="card__overlay">
           <div className="card__options">
             <Link to={`/journal/${id}`}>View</Link>
-            <button 
-              onClick={ () => handleEdit(id, { title, body }) }
-              >
-                Edit
+            <button type="submit" onClick={() => updateJournal(id)}>
+              Edit
             </button>
-            <button onClick={ () => handleDelete(id) }>Delete</button>
+
+            <button type="submit" onClick={() => deleteJournal(id)}>
+              Delete
+            </button>
           </div>
         </div>
-      }
-    </JournalChecker>
+      )}
+    </JournalWrapper>
   );
 }
 
