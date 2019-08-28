@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import JournalWrapper from '../journalWrapper';
 
@@ -12,7 +13,7 @@ import './journalCard.scss';
  * @returns {object} JSX
  */
 function JournalCard({ journal, authenticated, updateJournal, deleteJournal }) {
-  const { title, created_at, _id: id, username, body } = journal;
+  const { title, created_at: createdAt, _id: id, username } = journal;
 
   const [options, setOptions] = useState(false);
 
@@ -25,11 +26,11 @@ function JournalCard({ journal, authenticated, updateJournal, deleteJournal }) {
       <div className="card__head">
         <p className="card__author">
           {authenticated
-            ? moment(created_at).calendar()
+            ? moment(createdAt).calendar()
             : `Posted by ${username}`}
         </p>
       </div>
-      <p className="card__date">{moment(created_at).format('DD MMM YYYY')}</p>
+      <p className="card__date">{moment(createdAt).format('DD MMM YYYY')}</p>
       <p className="card__content">
         {title.length >= 33 ? `${title.substring(0, 33)}...` : title}
       </p>
@@ -52,3 +53,12 @@ function JournalCard({ journal, authenticated, updateJournal, deleteJournal }) {
 }
 
 export default JournalCard;
+
+JournalCard.propTypes = {
+  journal: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ).isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  deleteJournal: PropTypes.func.isRequired,
+  updateJournal: PropTypes.func.isRequired
+};

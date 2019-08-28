@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import './heading.scss';
 /**
@@ -28,3 +29,15 @@ function Heading({ toggleForm, authenticated, journal }) {
 }
 
 export default Heading;
+
+Heading.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+  toggleForm: PropTypes.func.isRequired,
+  journal: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  )
+};
+
+Heading.defaultProps = {
+  journal: null
+};

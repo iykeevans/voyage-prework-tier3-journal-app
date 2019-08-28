@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { User, Menu } from 'react-feather';
 import jwtDecode from 'jwt-decode';
+import PropTypes from 'prop-types';
 
 import SignUp from '../Signup/signup';
 import Login from '../Login/login';
@@ -24,7 +25,7 @@ function Navbar({ authenticated, login, logout, registerUser }) {
     <nav className="nav">
       <Link to="/" className="nav__logo">
         <span>Digital</span>
-        Journal
+        &nbsp;Journal
       </Link>
       <Menu className="nav__menu" />
 
@@ -76,3 +77,10 @@ function Navbar({ authenticated, login, logout, registerUser }) {
 }
 
 export default Navbar;
+
+Navbar.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired
+};

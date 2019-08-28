@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /**
  * function JournalWrapper
@@ -23,3 +24,10 @@ function JournalWrapper({ children, authenticated, link, toggleOptions }) {
 }
 
 export default JournalWrapper;
+
+JournalWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  link: PropTypes.string.isRequired,
+  toggleOptions: PropTypes.func.isRequired
+};
