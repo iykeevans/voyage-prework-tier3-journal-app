@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X } from 'react-feather';
+import PropTypes from 'prop-types';
 
 import TextField from '../../Textfield/textfield';
 import ModalOverlay from '../../ModalOverlay/modalOverlay';
@@ -64,3 +65,8 @@ function Login({ toggleForm, login }) {
 }
 
 export default Login;
+
+Login.propTypes = {
+  toggleForm: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired
+};

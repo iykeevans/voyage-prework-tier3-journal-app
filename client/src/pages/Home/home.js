@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import Heading from '../../components/Heading/heading';
 import JournalList from '../../components/containers/JournalList/journalList';
@@ -75,6 +76,7 @@ function Journals({ authenticated }) {
 
   const deleteJournal = async id => {
     try {
+      // eslint-disable-next-line no-underscore-dangle
       const newJournals = journals.filter(journal => journal._id !== id);
       setJournals(newJournals);
       axios.defaults.headers.common.Authorization = `Bearer ${getToken()}`;
@@ -121,3 +123,7 @@ function Journals({ authenticated }) {
 }
 
 export default Journals;
+
+Journals.propTypes = {
+  authenticated: PropTypes.bool.isRequired
+};

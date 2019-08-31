@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import JournalCard from '../../JournalCard/journalCard';
 
 import './journalList.scss';
@@ -24,6 +26,7 @@ function JournalList({
         allJournals.map(journal => (
           <JournalCard
             journal={journal}
+            // eslint-disable-next-line no-underscore-dangle
             key={journal._id}
             authenticated={authenticated}
             deleteJournal={deleteJournal}
@@ -35,3 +38,14 @@ function JournalList({
 }
 
 export default JournalList;
+
+JournalList.propTypes = {
+  allJournals: PropTypes.arrayOf(PropTypes.object),
+  authenticated: PropTypes.bool.isRequired,
+  deleteJournal: PropTypes.func.isRequired,
+  updateJournal: PropTypes.func.isRequired
+};
+
+JournalList.defaultProps = {
+  allJournals: null
+};

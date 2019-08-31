@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X } from 'react-feather';
+import PropTypes from 'prop-types';
 
 import TextField from '../../Textfield/textfield';
 import ModalOverlay from '../../ModalOverlay/modalOverlay';
@@ -62,3 +63,8 @@ function EditJournal({ toggleForm, getFormValues }) {
 }
 
 export default EditJournal;
+
+EditJournal.propTypes = {
+  toggleForm: PropTypes.func.isRequired,
+  getFormValues: PropTypes.func.isRequired
+};
