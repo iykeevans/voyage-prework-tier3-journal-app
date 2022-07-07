@@ -36,7 +36,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.6.9",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
